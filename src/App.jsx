@@ -81,7 +81,7 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header disCou={disCou} />
 
       <main>
         <SearchPlace
