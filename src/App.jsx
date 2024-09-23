@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import WeatherInfo from "./components/Weather Info";
 import SearchPlace from "./components/Search Place";
@@ -55,7 +55,25 @@ export default function App() {
     { county: "West-Pokot", latitude: 1.2386, longitude: 35.1173 },
   ];
 
-  const [disCou, setDisCou] = useState({});
+  const [disCou, setDisCou] = useState(null);
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${disCou.latitude}&lon=${disCou.longitude}&appid=834d5b4b07fbeb86499a22c0ed5a1216&units=metric`
+        );
+        const data = await res.json();
+
+        setInfo(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, [disCou]);
 
   return (
     <>
@@ -66,8 +84,9 @@ export default function App() {
           counties={counties}
           disCou={disCou}
           setDisCou={setDisCou}
+          setInfo={setInfo}
         />
-        <WeatherInfo disCou={disCou} />
+        <WeatherInfo disCou={disCou} info={info} />
       </main>
       <Footer />
     </>

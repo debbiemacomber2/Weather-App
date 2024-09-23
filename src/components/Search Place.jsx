@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function SearchPlace({ setDisCou, counties }) {
+export default function SearchPlace({ disCou, setDisCou, counties, setInfo }) {
   const [input, setInput] = useState("");
 
   function inputChange(e) {

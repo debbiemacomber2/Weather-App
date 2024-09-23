@@ -1,28 +1,72 @@
-export default function WeatherInfo({ disCou }) {
+export default function WeatherInfo({ disCou, info }) {
   return (
     <section className="weatherInfo">
-      {Object.keys(disCou).length === 0 ? (
+      {!disCou ? (
         <p className="blink empty">
           Nothing to Show Here. Search for a county in the Input Field above to
           get information about it.
         </p>
       ) : (
-        <article className="infoBox">
-          <h2>{disCou.county && disCou.county + " " + "County"}</h2>
-          <h3>Co-ordinates</h3>
-          <p>
-            Latitude:{" "}
-            {disCou.latitude < 0
-              ? Math.abs(disCou.latitude) + "\u00B0S"
-              : disCou.latitude + "\u00B0N"}
-          </p>
-          <p>
-            Longitude:{" "}
-            {disCou.longitude < 0
-              ? Math.abs(disCou.longitude) + "\u00B0S"
-              : disCou.longitude + "\u00B0N"}
-          </p>
-        </article>
+        info && (
+          <div className="infoBox">
+            <article>
+              <h2 className="county">
+                {disCou.county && disCou.county + " " + "County"}
+              </h2>
+              <div className="coordinates">
+                <p>
+                  Latitude:{" "}
+                  {disCou.latitude < 0
+                    ? Math.abs(disCou.latitude) + "\u00B0S"
+                    : disCou.latitude + "\u00B0N"}
+                </p>
+                <p>
+                  Longitude:{" "}
+                  {disCou.longitude < 0
+                    ? Math.abs(disCou.longitude) + "\u00B0S"
+                    : disCou.longitude + "\u00B0N"}
+                </p>
+              </div>
+              <h3 className="mainWeather">{info.weather[0].main}</h3>
+              <p className="weatherDescription">
+                {info.weather[0].description}
+              </p>
+              <p>
+                {info.weather[0].main === "Clouds" &&
+                  `${info.clouds.all}% cloudiness`}
+              </p>
+            </article>
+
+            <article>
+              <h3>Temprature</h3>
+              <div>
+                <h4>{info.main.temp}</h4>
+                <p className="max">max:{info.main.temp_max}</p>
+                <p className="min">min:{info.main.temp_min}</p>
+              </div>
+              <h5>It feels like {info.main.feels_like}</h5>
+            </article>
+
+            <article>
+              <h3>Pressure</h3>
+              <h4>{info.main.pressure}hPa</h4>
+              <p>Sea Level: {info.main.sea_level}</p>
+              <p>Ground Level: {info.main.grnd_level}</p>
+            </article>
+
+            <article>
+              <h3>Humidity</h3>
+              <h4>{info.main.humidity}%</h4>
+            </article>
+
+            <article>
+              <h3>Wind</h3>
+              <h4>{info.wind.speed}m/s</h4>
+              <h4>{info.wind.speed > 0 && `${info.wind.deg}\u00B0`}</h4>
+              <p>{info.wind.gust && `Gust:${info.wind.gust}m/s`}</p>
+            </article>
+          </div>
+        )
       )}
     </section>
   );
