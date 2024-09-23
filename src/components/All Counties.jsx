@@ -37,6 +37,7 @@ export default function AllCounties({ counties }) {
               <article>
                 <h2>{each.county.county} County</h2>
                 <div className=" dif">
+                  <p style={{ width: "fit-content" }}>Approx:</p>
                   <p>
                     {each.county.latitude < 0
                       ? Math.abs(each.county.latitude) + "\u00B0S"
