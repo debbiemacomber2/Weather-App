@@ -15,13 +15,11 @@ export default function WeatherInfo({ disCou, info }) {
               </h2>
               <div className="coordinates">
                 <p>
-                  Latitude:{" "}
                   {disCou.latitude < 0
                     ? Math.abs(disCou.latitude) + "\u00B0S"
                     : disCou.latitude + "\u00B0N"}
                 </p>
                 <p>
-                  Longitude:{" "}
                   {disCou.longitude < 0
                     ? Math.abs(disCou.longitude) + "\u00B0S"
                     : disCou.longitude + "\u00B0N"}
@@ -39,11 +37,9 @@ export default function WeatherInfo({ disCou, info }) {
 
             <article>
               <h3>Temprature</h3>
-              <div>
-                <h4>{info.main.temp}</h4>
-                <p className="max">max:{info.main.temp_max}</p>
-                <p className="min">min:{info.main.temp_min}</p>
-              </div>
+
+              <h4>{info.main.temp}</h4>
+
               <h5>It feels like {info.main.feels_like}</h5>
             </article>
 
@@ -55,15 +51,15 @@ export default function WeatherInfo({ disCou, info }) {
             </article>
 
             <article>
-              <h3>Humidity</h3>
-              <h4>{info.main.humidity}%</h4>
-            </article>
-
-            <article>
               <h3>Wind</h3>
               <h4>{info.wind.speed}m/s</h4>
               <h4>{info.wind.speed > 0 && `${info.wind.deg}\u00B0`}</h4>
               <p>{info.wind.gust && `Gust:${info.wind.gust}m/s`}</p>
+            </article>
+
+            <article>
+              <h3>Humidity</h3>
+              <h4>{info.main.humidity}%</h4>
             </article>
           </div>
         )

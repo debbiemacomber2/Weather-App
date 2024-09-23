@@ -23,6 +23,8 @@ export default function SearchPlace({ disCou, setDisCou, counties, setInfo }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    setInfo(null);
+
     const couObj = counties.find(
       (each) =>
         each.county.toUpperCase() === input.replace(/\s+/g, "").toUpperCase() ||

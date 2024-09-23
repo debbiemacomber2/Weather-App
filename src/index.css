@@ -123,12 +123,16 @@ header .container {
   padding: 0.5rem;
 }
 
-.weatherInfo {
-  display: flex;
-}
-
 .infoBox {
   background-color: var(--infoBox);
+  display: flex;
+  line-height: 1;
+}
+.infoBox article {
+  border: 1px solid var(--bgColor);
+  border-radius: 0.5rem;
+  margin: 0.2rem;
+  padding-inline: 0.3rem;
 }
 
 .blink {
@@ -159,4 +163,26 @@ form {
   width: 100%;
   text-align: center;
   padding: 4rem;
+}
+
+.coordinates,
+.minmax {
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+}
+.coordinates p,
+.minmax p {
+  margin-top: 7px;
+  padding-inline: 3px;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  background-color: var(--searchBox);
+}
+.minmax p {
+  font-size: 0.8rem;
+}
+
+.county {
+  margin-block-end: 0;
 }
