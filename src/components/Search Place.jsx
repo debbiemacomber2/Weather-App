@@ -1,11 +1,10 @@
 import { useState } from "react";
 
-export default function SearchPlace({ disCou, setDisCou, counties, setInfo }) {
+export default function SearchPlace({ setDisCou, counties, setInfo, setAll }) {
   const [input, setInput] = useState("");
 
   function inputChange(e) {
     setInput(e.target.value);
-    console.log(e.target.value);
     resetErr();
   }
 
@@ -23,6 +22,7 @@ export default function SearchPlace({ disCou, setDisCou, counties, setInfo }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    setAll(false);
     setInfo(null);
 
     const couObj = counties.find(
@@ -36,19 +36,28 @@ export default function SearchPlace({ disCou, setDisCou, counties, setInfo }) {
     setInput("");
   }
 
+  function handleAll() {
+    setDisCou(null);
+    setInfo(null);
+    setAll(true);
+  }
+
   return (
     <section className="searchField">
-      <form className="form" onSubmit={(e) => handleSubmit(e)}>
-        <input
-          id="county"
-          onChange={(e) => inputChange(e)}
-          type="text"
-          value={input}
-          autoFocus
-          autoComplete="off"
-        />
-        <button type="submit">Get</button>
-      </form>
+      <div className="btns">
+        <form className="form" onSubmit={(e) => handleSubmit(e)}>
+          <input
+            id="county"
+            onChange={(e) => inputChange(e)}
+            type="text"
+            value={input}
+            autoFocus
+            autoComplete="off"
+          />
+          <button type="submit">Get</button>
+        </form>
+        <button onClick={handleAll}>Show All</button>
+      </div>
       <p id="err"></p>
     </section>
   );

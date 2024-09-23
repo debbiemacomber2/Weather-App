@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import WeatherInfo from "./components/Weather Info";
 import SearchPlace from "./components/Search Place";
 import Footer from "./components/Footer";
+import AllCounties from "./components/All Counties";
 
 export default function App() {
   const counties = [
@@ -57,6 +58,7 @@ export default function App() {
 
   const [disCou, setDisCou] = useState(null);
   const [info, setInfo] = useState(null);
+  const [all, setAll] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -76,7 +78,7 @@ export default function App() {
       }
     }
 
-    fetchData();
+    disCou && fetchData();
   }, [disCou]);
 
   return (
@@ -86,11 +88,15 @@ export default function App() {
       <main>
         <SearchPlace
           counties={counties}
-          disCou={disCou}
           setDisCou={setDisCou}
           setInfo={setInfo}
+          setAll={setAll}
         />
-        <WeatherInfo disCou={disCou} info={info} />
+        {all ? (
+          <AllCounties counties={counties} />
+        ) : (
+          <WeatherInfo disCou={disCou} info={info} />
+        )}
       </main>
       <Footer />
     </>

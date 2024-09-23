@@ -20,8 +20,8 @@ export default function Header({ disCou }) {
             </p>
             <p>
               {disCou.longitude < 0
-                ? Math.abs(disCou.longitude) + "\u00B0S"
-                : disCou.longitude + "\u00B0N"}
+                ? Math.abs(disCou.longitude) + "\u00B0W"
+                : disCou.longitude + "\u00B0E"}
             </p>
           </div>
         </div>
